@@ -1,7 +1,7 @@
 # Setup Plan
-- [ ] Check the NAOqi version with your lab (drives everything else)
+**Environment Setup**
+- [ ] Check the NAOqi version (very important!!)
 - [ ] Install the correct Python version via `pyenv`
 - [ ] Download the NAOqi Python SDK
-- [ ] Set up your virtual environment and confirm you can import `naoqi`
-- [ ] Initialize your Git repository with the structure we discussed
+- [ ] Set up a virtual environment and confirm to import `naoqi`
 - [ ] Install core dependencies and pin them in `requirements.txt`
