@@ -27,3 +27,6 @@ python --version
 python -m venv nao_env
 source nao_env/bin/activate
 ```
+
+## References
+[NAOqi 2.8 Python SDK official documentation](http://doc.aldebaran.com/2-8/dev/python/index.html)
