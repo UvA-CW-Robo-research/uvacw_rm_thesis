@@ -42,6 +42,18 @@ python test_naoqi.py
 
 No error means the SDK is installed successfully.
 
+## VS Code Setup
+
+1. Install the **Python extension** by Microsoft (**⌘ + Shift + X** → search `Python`)
+2. Open the project folder: **File → Open Folder** → select `nao_teleoperation`
+3. Activate the virtual environment in the VS Code terminal:
+```bash
+source nao_env/bin/activate
+```
+
+4. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `/Users/ada/nao_teleoperation/nao_env/bin/` and select `python`
+5. Confirm the bottom left corner of VS Code shows `Python 2.7.18 ('nao_env')`
+
 ## References
 
 [NAOqi 2.8 Python SDK official documentation](http://doc.aldebaran.com/2-8/dev/python/index.html)
