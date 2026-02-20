@@ -17,6 +17,7 @@ brew install pyenv
 pyenv install 3.8.18
 
 # Set Python version locally for this project
+mkdir nao_teleoperation
 cd nao_teleoperation
 pyenv local 3.8.18
 
