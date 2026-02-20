@@ -2,9 +2,9 @@
 
 ## Requirements
 
-**NAO Robot:** NAOqi 2.8.6.23 (Python 2.7 only), IP stored in `config.toml`
+- **NAO Robot:** NAOqi 2.8.6.23 (Python 2.7 only), IP stored in `config.toml`
 
-**MacBook Pro:** 2.6 GHz 6-Core Intel Core i7
+- **MacBook Pro:** 2.6 GHz 6-Core Intel Core i7
 
 ## Environment Setup
 
