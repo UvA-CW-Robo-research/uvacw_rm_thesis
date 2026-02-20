@@ -58,6 +58,8 @@ source nao_env/bin/activate
 
 [NAOqi 2.8 Python SDK official documentation](http://doc.aldebaran.com/2-8/dev/python/index.html)
 
+[Python 2.7.18 download](https://www.python.org/downloads/release/python-2718/)
+
 [Community pynaoqi installation guide for Mac](https://github.com/cristianrubioa/pynaoqi-installation-for-mac)
 
-[Python 2.7.18 download](https://www.python.org/downloads/release/python-2718/)
+
