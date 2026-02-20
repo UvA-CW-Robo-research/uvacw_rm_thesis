@@ -35,9 +35,9 @@ echo 'export QI_SDK_PREFIX=/Users/ada/pynaoqi-installation-for-mac/pynaoqi' >> ~
 source ~/.zshrc
 ```
 
-Verify the installation:
+Verify the installation by running the test script found in `code/test_naoqi.py`:
 ```bash
-python test_naoqi.py
+python code/test_naoqi.py
 ```
 
 No error means the SDK is installed successfully.
@@ -52,7 +52,7 @@ source nao_env/bin/activate
 ```
 
 4. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `/Users/ada/nao_teleoperation/nao_env/bin/` and select `python`
-5. Confirm the bottom left corner of VS Code shows `Python 2.7.18 ('nao_env')`
+5. Confirm the bottom right corner of VS Code shows `Python 2.7.18 ('nao_env')`
 
 ## References
 
