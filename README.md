@@ -2,7 +2,7 @@
 
 ## Requirements
 
-**NAO Robot:** NAOqi 2.8.6.23 (compatible with Python 3.6–3.9), IP stored in `config.toml`
+**NAO Robot:** NAOqi 2.8.6.23 (compatible with Python 2.7 ONLY), IP stored in `config.toml`
 
 **MacBook Pro:** 2.6 GHz 6-Core Intel Core i7
 
@@ -13,12 +13,12 @@
 brew install pyenv
 
 # Install a compatible Python version
-pyenv install 3.8.18
+pyenv install 2.7.18
 
 # Set Python version locally for this project
 mkdir nao_teleoperation
 cd nao_teleoperation
-pyenv local 3.8.18
+pyenv local 2.7.18
 
 # Verify
 python --version
