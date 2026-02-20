@@ -14,15 +14,15 @@ Install pyenv via Homebrew and set up a compatible Python version:
 brew install pyenv
 # Install a compatible Python version
 pyenv install 3.8.18
+
 # Set Python version locally for this project
 cd nao_teleoperation
 pyenv local 3.8.18
+
 # Verify
 python --version
-```
 
-Create and activate a virtual environment:
-```bash
+# Create and activate a virtual environment
 python -m venv nao_env
 source nao_env/bin/activate
 ```
