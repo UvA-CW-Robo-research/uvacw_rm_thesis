@@ -35,7 +35,7 @@ echo 'export QI_SDK_PREFIX=/Users/ada/pynaoqi-installation-for-mac/pynaoqi' >> ~
 source ~/.zshrc
 ```
 
-Verify the installation by running the test script found in [`test_naoqi.py`](https://github.com/adashiyj/uvacw_rm_thesis/blob/main/code/test_naoqi.py):
+Verify the installation by running the test script found in [test_naoqi.py](https://github.com/adashiyj/uvacw_rm_thesis/blob/main/code/test_naoqi.py):
 ```bash
 python code/test_naoqi.py
 ```
