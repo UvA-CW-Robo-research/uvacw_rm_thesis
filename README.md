@@ -54,6 +54,43 @@ source nao_env/bin/activate
 4. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `/Users/ada/nao_teleoperation/nao_env/bin/` and select `python`
 5. Confirm the bottom right corner of VS Code shows `Python 2.7.18 ('nao_env')`
 
+## Running the Experiment
+
+Make sure the robot is on and connected to the same network, then run:
+```bash
+python code/main.py
+```
+
+Enter the condition number when prompted:
+```
+1: Team Identity + Humor
+2: Team Identity + No Humor
+3: No Team Identity + Humor
+4: No Team Identity + No Humor
+```
+
+NAO will stand up, enable face tracking, and wait for your input. Use the following keyboard controls during the session:
+
+| Key | Action |
+|-----|--------|
+| `Enter` | Advance to next step |
+| `N` | Nod (listening gesture) |
+| `F` | Trigger failure sequence |
+| `W` | Wave (hello or goodbye) |
+| `Esc` | Safe shutdown |
+
+## Experiment Script Architecture
+
+The experiment script is organized across four files in the `code/` folder:
+
+`script.py` contains all 24 steps of the session organized by condition. Each step is a tuple of a type and content, for example `("speech", "Hello!")` or `("wait", "Wait for response.")`. The four step types are `speech` (NAO speaks the line), `wait` (experimenter action required), `failure` (triggers the freeze sequence), and `gesture` (triggers a physical gesture).
+
+`gestures.py` handles all physical behaviors — the hello and goodbye wave, the nodding listening gesture, the 5-second failure sequence with red LED eyes, and natural blinking during speech. It also manages the robot connection and returns all NAOqi proxies.
+
+`controller.py` listens for keyboard input and controls the flow of the session. It advances through the script step by step, triggering the appropriate speech or gesture for each step type.
+
+`main.py` is the entry point. It loads `config.toml`, prompts for the condition, connects to the robot, stands it up, enables face tracking and breathing animation, and hands control to the controller. On exit it safely shuts the robot down.
+
 ## References
 
 [NAOqi 2.8 Python SDK official documentation](http://doc.aldebaran.com/2-8/dev/python/index.html)
