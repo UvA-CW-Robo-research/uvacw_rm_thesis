@@ -84,12 +84,12 @@ NAO will stand up, enable face tracking, and wait for your input. Use the follow
 ```
 nao_teleoperation/
 ├── code/
+│   ├── __init__.py      # Makes code/ a Python package
 │   ├── main.py          # Entry point — connects to robot, loads condition, starts session
 │   ├── script.py        # All 24 dialogue steps organized by condition (1–4)
 │   ├── gestures.py      # Physical behaviors — wave, nod, blink, failure sequence
 │   └── controller.py    # Keyboard input — controls session flow step by step
-├── config.toml          # Robot IP, port, motion and logging settings
-└── README.md
+└── config.toml          # Robot IP, port, motion and logging settings
 ```
 
 Each step in the script is a tuple of `(type, content)`:
