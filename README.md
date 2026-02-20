@@ -31,6 +31,8 @@ source nao_env/bin/activate
 
 ## NAOqi Python SDK Installation
 
+Download and install Python 2.7.18 from [python.org](https://www.python.org/downloads/release/python-2718/) — required by the SDK as it expects Python at `/Library/Frameworks/Python.framework/Versions/2.7/`.
+
 Clone the community SDK repository for Mac:
 ```bash
 cd ~
@@ -47,8 +49,7 @@ source ~/.zshrc
 
 Verify the installation:
 ```bash
-python
->>> import naoqi
+python test_naoqi.py
 ```
 
 No error means the SDK is installed successfully.
@@ -58,3 +59,5 @@ No error means the SDK is installed successfully.
 [NAOqi 2.8 Python SDK official documentation](http://doc.aldebaran.com/2-8/dev/python/index.html)
 
 [Community pynaoqi installation guide for Mac](https://github.com/cristianrubioa/pynaoqi-installation-for-mac)
+
+[Python 2.7.18 download](https://www.python.org/downloads/release/python-2718/)
