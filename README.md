@@ -5,6 +5,7 @@
 ### NAO Robot
 - NAOqi version: 2.8.6.23 (compatible with Python 3.6–3.9)
 - IP: `192.168.0.102`
+- (I'm using the grey NAO numbered 1 stored in Jochen's office)
 
 ### MacBook Pro
 - Processor: 2.6 GHz 6-Core Intel Core i7
