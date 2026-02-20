@@ -12,6 +12,7 @@ Install pyenv via Homebrew and set up a compatible Python version:
 ```bash
 # Install pyenv via Homebrew
 brew install pyenv
+
 # Install a compatible Python version
 pyenv install 3.8.18
 
