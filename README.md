@@ -79,17 +79,26 @@ NAO will stand up, enable face tracking, and wait for your input. Use the follow
 | `W` | Wave (hello or goodbye) |
 | `Esc` | Safe shutdown |
 
-## Experiment Script Architecture
+## Code Architecture
+```
+nao_teleoperation/
+├── code/
+│   ├── main.py          # Entry point — connects to robot, loads condition, starts session
+│   ├── script.py        # All 24 dialogue steps organized by condition (1–4)
+│   ├── gestures.py      # Physical behaviors — wave, nod, blink, failure sequence
+│   └── controller.py    # Keyboard input — controls session flow step by step
+├── config.toml          # Robot IP, port, motion and logging settings
+└── README.md
+```
 
-The experiment script is organized across four files in the `code/` folder:
+Each step in the script is a tuple of `(type, content)`:
 
-`script.py` contains all 24 steps of the session organized by condition. Each step is a tuple of a type and content, for example `("speech", "Hello!")` or `("wait", "Wait for response.")`. The four step types are `speech` (NAO speaks the line), `wait` (experimenter action required), `failure` (triggers the freeze sequence), and `gesture` (triggers a physical gesture).
-
-`gestures.py` handles all physical behaviors — the hello and goodbye wave, the nodding listening gesture, the 5-second failure sequence with red LED eyes, and natural blinking during speech. It also manages the robot connection and returns all NAOqi proxies.
-
-`controller.py` listens for keyboard input and controls the flow of the session. It advances through the script step by step, triggering the appropriate speech or gesture for each step type.
-
-`main.py` is the entry point. It loads `config.toml`, prompts for the condition, connects to the robot, stands it up, enables face tracking and breathing animation, and hands control to the controller. On exit it safely shuts the robot down.
+| Type | Triggered by | Description |
+|------|-------------|-------------|
+| `speech` | `Enter` | NAO speaks the line with natural blinking |
+| `wait` | `Enter` | Pause shown in terminal for experimenter action |
+| `failure` | `F` | 5-second freeze with red LEDs |
+| `gesture` | `W` | Wave hello or goodbye |
 
 ## References
 
@@ -98,5 +107,3 @@ The experiment script is organized across four files in the `code/` folder:
 [Python 2.7.18 download](https://www.python.org/downloads/release/python-2718/)
 
 [Community pynaoqi installation guide for Mac](https://github.com/cristianrubioa/pynaoqi-installation-for-mac)
-
-
