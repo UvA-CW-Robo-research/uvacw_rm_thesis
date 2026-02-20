@@ -40,7 +40,7 @@ Verify the installation by running the test script found in [test_naoqi.py](http
 python code/test_naoqi.py
 ```
 
-No error means the SDK is installed successfully.
+Seeing "NAOqi imported successfully!" means the SDK is installed successfully.
 
 ## VS Code Setup
 
