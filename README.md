@@ -8,30 +8,18 @@
 
 ## Environment Setup
 
-Install pyenv via Homebrew and set up a compatible Python version:
-```bash
-brew install pyenv
-pyenv install 2.7.18
-```
+Download and install Python 2.7.18 from [python.org](https://www.python.org/downloads/release/python-2718/) — required by the SDK as it expects Python at `/Library/Frameworks/Python.framework/Versions/2.7/`.
 
-Create the project folder and set the Python version locally:
+Install virtualenv and create the virtual environment using the official Python 2.7:
 ```bash
 mkdir nao_teleoperation
 cd nao_teleoperation
-pyenv local 2.7.18
-python --version
-```
-
-Install virtualenv and create the virtual environment:
-```bash
-pip install virtualenv
-python -m virtualenv nao_env
+/Library/Frameworks/Python.framework/Versions/2.7/bin/python -m pip install virtualenv
+/Library/Frameworks/Python.framework/Versions/2.7/bin/python -m virtualenv nao_env
 source nao_env/bin/activate
 ```
 
 ## NAOqi Python SDK Installation
-
-Download and install Python 2.7.18 from [python.org](https://www.python.org/downloads/release/python-2718/) — required by the SDK as it expects Python at `/Library/Frameworks/Python.framework/Versions/2.7/`.
 
 Clone the community SDK repository for Mac:
 ```bash
