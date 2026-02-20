@@ -1,5 +1,3 @@
-# README
-
 ## Requirements
 A NAO robot:
 - NAOqi version: 2.8.6.23 (compatible with Python 3.6–3.9)
