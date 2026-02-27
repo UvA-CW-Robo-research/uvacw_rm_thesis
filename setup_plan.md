@@ -2,5 +2,12 @@
 - [x] Check the NAOqi version (very important!!)
 - [x] Install the correct Python version via `pyenv`
 - [x] Set up a virtual environment for this project
-- [ ] Download the NAOqi Python SDK
+- [x] Download the NAOqi Python SDK
+- [x] Build Python files for testing (e.g., gesture, script, controller, etc.)
+- [x] Test full experiment flow with the robot
 - [ ] Install core dependencies and pin them in `requirements.txt`
+- [ ] Finalize script with supervisor
+- [ ] Generate audio files for the final script using TTS software such as Speechma
+- [ ] Transfer audio files to the robot via SCP
+- [ ] Restructure the architecture after implementing the audio files
+- [ ] Final pilot test before data collection
