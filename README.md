@@ -23,7 +23,10 @@ source nao_env/bin/activate
 ```
 
 ### 3. NAOqi Python SDK
-Clone the community SDK repository for Mac:
+
+> ⚠️ The [Aldebaran Community](https://community.aldebaran.com/en/resources/software) website is expired and the SDK can no longer be downloaded through the official channel. Also note that the official SDK only supports Python 2.7 — see [NAOqi 2.8 Python install guide](http://doc.aldebaran.com/2-8/dev/python/install_guide.html) for reference.
+
+As an alternative, clone the community SDK repository for Mac:
 ```bash
 cd ~
 git clone https://github.com/cristianrubioa/pynaoqi-installation-for-mac
@@ -42,7 +45,7 @@ Verify by running `python code/connection_test.py` to check if NAO's connection 
 ### 4. VS Code
 1. Install the **Python extension** by Microsoft (**⌘ + Shift + X** → search `Python`)
 2. Open the project folder: **File → Open Folder** → select `nao_teleoperation`
-3. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `/Users/ada/nao_teleoperation/nao_env/bin/` and select `python`
+3. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `.../nao_teleoperation/nao_env/bin/` and select `python`
 4. Confirm the bottom right corner of VS Code shows `Python 2.7.18 ('nao_env')`
 
 ---
