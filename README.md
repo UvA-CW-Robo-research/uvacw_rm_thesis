@@ -6,11 +6,14 @@
 
 **MacBook Pro:** 2.6 GHz 6-Core Intel Core i7
 
-## Environment Setup
+---
 
-Download and install Python 2.7.18 from [python.org](https://www.python.org/downloads/release/python-2718/) — required by the NAOqi Python SDK as it expects Python at `/Library/Frameworks/Python.framework/Versions/2.7/`.
+## First Time Setup
 
-Install `virtualenv` and create the virtual environment using the official Python 2.7:
+### 1. Python 2.7.18
+Download and install from [python.org](https://www.python.org/downloads/release/python-2718/) — required by the NAOqi SDK at `/Library/Frameworks/Python.framework/Versions/2.7/`.
+
+### 2. Virtual Environment
 ```bash
 mkdir nao_teleoperation
 cd nao_teleoperation
@@ -19,8 +22,7 @@ cd nao_teleoperation
 source nao_env/bin/activate
 ```
 
-## NAOqi Python SDK Installation
-
+### 3. NAOqi Python SDK
 Clone the community SDK repository for Mac:
 ```bash
 cd ~
@@ -35,25 +37,25 @@ echo 'export QI_SDK_PREFIX=/Users/ada/pynaoqi-installation-for-mac/pynaoqi' >> ~
 source ~/.zshrc
 ```
 
-Verify the installation by running:
-```bash
-import naoqi
-print("NAOqi imported successfully!")
-```
+Verify by running `python code/test_naoqi.py` — seeing "NAOqi imported successfully!" means the SDK is working.
 
-Seeing "NAOqi imported successfully!" means the SDK is installed successfully.
-
-## VS Code Setup
-
+### 4. VS Code
 1. Install the **Python extension** by Microsoft (**⌘ + Shift + X** → search `Python`)
 2. Open the project folder: **File → Open Folder** → select `nao_teleoperation`
-3. Activate the virtual environment in the VS Code terminal:
+3. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `/Users/ada/nao_teleoperation/nao_env/bin/` and select `python`
+4. Confirm the bottom right corner of VS Code shows `Python 2.7.18 ('nao_env')`
+
+---
+
+## Every Session
+
+Activate the virtual environment in the terminal:
 ```bash
+cd ~/nao_teleoperation
 source nao_env/bin/activate
 ```
 
-4. Select the correct Python interpreter: **⌘ + Shift + P** → `Python: Select Interpreter` → `Enter interpreter path...` → `Find...` → navigate to `/Users/ada/nao_teleoperation/nao_env/bin/` and select `python`
-5. Confirm the bottom right corner of VS Code shows `Python 2.7.18 ('nao_env')`
+---
 
 ## Running the Experiment
 
@@ -70,7 +72,7 @@ Enter the condition number when prompted:
 4: No Team Identity + No Humor
 ```
 
-NAO will stand up, enable face tracking, and wait for your input. Use the following keyboard controls during the session:
+NAO will stand up, enable face tracking, and wait for your input:
 
 | Key | Action |
 |-----|--------|
@@ -79,6 +81,8 @@ NAO will stand up, enable face tracking, and wait for your input. Use the follow
 | `F` | Trigger failure sequence |
 | `W` | Wave (hello or goodbye) |
 | `Esc` | Safe shutdown |
+
+---
 
 ## Code Architecture
 ```
@@ -101,12 +105,7 @@ Each step in the script is a tuple of `(type, content)`:
 | `failure` | `F` | 5-second freeze with red LEDs |
 | `gesture` | `W` | Wave hello or goodbye |
 
-## Next Time
-To access the environment for this project in VS Code
-```
-cd ~/nao_teleoperation
-source nao_env/bin/activate
-```
+---
 
 ## References
 
