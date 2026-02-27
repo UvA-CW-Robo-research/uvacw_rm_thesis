@@ -10,7 +10,7 @@ print(tts.getAvailableVoices())
 "
 ```
 
-This robot has three voices: `maki_n16` (Japanese), `naoenu` (English default), `naomnc` (English alternative).
+This robot has three voices: `maki_n16` (Japanese), `naoenu` (English default), `naomnc` (English alternative - but with a Chinese accent).
 
 ## Change Voice and Parameters
 
@@ -37,6 +37,5 @@ tts.say('Hello! My name is NAO. What is your name?')
 
 ## Notes
 
-- Voice settings reset when the robot restarts — they are set permanently in `gestures.py` inside the `connect` function
-- Additional voice packages are not freely available for NAO 2.8 — contact SoftBank support to order them
-- Pre-recorded audio files via `ALAudioPlayer` are a good alternative for higher quality voice
+- Voice settings reset when the robot restarts. They are set permanently in `gestures.py` inside the `connect` function
+- Additional voice packages are not freely available for NAO 2.8. Contact SoftBank support to order them
