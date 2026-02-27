@@ -72,7 +72,7 @@ Enter the condition number when prompted:
 4: No Team Identity + No Humor
 ```
 
-NAO will stand up, enable face tracking, and wait for your input:
+NAO will sit down, enable face tracking, and wait for your input:
 
 | Key | Action |
 |-----|--------|
@@ -86,7 +86,6 @@ NAO will stand up, enable face tracking, and wait for your input:
 
 ## Code Architecture
 ```
-nao_teleoperation/
 nao_teleoperation/
 ├── code/
 │   ├── __init__.py           # Makes code/ a Python package
@@ -104,8 +103,17 @@ Each step in the script is a tuple of `(type, content)`:
 |------|-------------|-------------|
 | `speech` | `Enter` | NAO speaks the line with natural blinking |
 | `wait` | `Enter` | Pause shown in terminal for experimenter action |
-| `failure` | `F` | 5-second freeze |
+| `failure` | `F` | 5-second natural freeze — speech and blinking stop abruptly |
 | `gesture` | `W` | Wave hello or goodbye |
+
+## NAO Voice Settings
+
+| Parameter | Value |
+|-----------|-------|
+| Voice | `naoenu` |
+| Speed | `75` |
+| Pitch | `0.9` |
+| Volume | `100` |
 
 ---
 
