@@ -5,7 +5,7 @@
 ```bash
 python -c "
 from naoqi import ALProxy
-tts = ALProxy('ALTextToSpeech', '192.168.0.102', 9559)
+tts = ALProxy('ALTextToSpeech', 'ENTER-NAO-IP-ADDRESS', ENTER-PORT-NUMBER)
 print(tts.getAvailableVoices())
 "
 ```
