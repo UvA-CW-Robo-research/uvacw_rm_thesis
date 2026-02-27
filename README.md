@@ -102,7 +102,7 @@ Each step in the script is a tuple of `(type, content)`:
 |------|-------------|-------------|
 | `speech` | `Enter` | NAO speaks the line with natural blinking |
 | `wait` | `Enter` | Pause shown in terminal for experimenter action |
-| `failure` | `F` | 5-second freeze with red LEDs |
+| `failure` | `F` | 5-second freeze |
 | `gesture` | `W` | Wave hello or goodbye |
 
 ---
