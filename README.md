@@ -37,7 +37,7 @@ echo 'export QI_SDK_PREFIX=/Users/ada/pynaoqi-installation-for-mac/pynaoqi' >> ~
 source ~/.zshrc
 ```
 
-Verify by running `python code/test_naoqi.py` — seeing "NAOqi imported successfully!" means the SDK is working.
+Verify by running `python code/connection_test.py` to check if NAO's connection is successful.
 
 ### 4. VS Code
 1. Install the **Python extension** by Microsoft (**⌘ + Shift + X** → search `Python`)
