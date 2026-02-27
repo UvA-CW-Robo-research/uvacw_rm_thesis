@@ -87,13 +87,15 @@ NAO will stand up, enable face tracking, and wait for your input:
 ## Code Architecture
 ```
 nao_teleoperation/
+nao_teleoperation/
 ├── code/
-│   ├── __init__.py      # Makes code/ a Python package
-│   ├── main.py          # Entry point — connects to robot, loads condition, starts session
-│   ├── script.py        # All 24 dialogue steps organized by condition (1–4)
-│   ├── gestures.py      # Physical behaviors — wave, nod, blink, failure sequence
-│   └── controller.py    # Keyboard input — controls session flow step by step
-└── config.toml          # Robot IP, port, motion and logging settings
+│   ├── __init__.py           # Makes code/ a Python package
+│   ├── main.py               # Entry point — connects to robot, loads condition, starts session
+│   ├── script.py             # All 24 dialogue steps organized by condition (1–4)
+│   ├── gestures.py           # Physical behaviors — wave, nod, blink, failure sequence
+│   ├── controller.py         # Keyboard input — controls session flow step by step
+│   └── connection_test.py    # Tests robot connection
+└── config.toml               # Robot IP, port, motion and logging settings
 ```
 
 Each step in the script is a tuple of `(type, content)`:
