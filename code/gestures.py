@@ -67,24 +67,21 @@ def wave(motion):
 
 def failure_sequence(motion, leds, awareness):
     """
-    Simulates robot failure:
-    1. Stop awareness and freeze for 5 seconds with red LEDs
-    2. Recover and restore awareness
+    Simulates a natural robot failure:
+    1. Stop awareness, speech and blinking freeze abruptly
+    2. Silence for 5 seconds
+    3. Recover and restore awareness
     """
     print("[FAILURE SEQUENCE TRIGGERED]")
 
-    # Stop face tracking during failure
+    # Stop face tracking and movement abruptly
     awareness.stopAwareness()
-
-    # Stop movement and show red LEDs
     motion.stopMove()
-    leds.fadeRGB("FaceLeds", 0xFF0000, 0.5)
 
-    # Freeze for 5 seconds
+    # Freeze for 5 seconds - no LEDs, no sound, complete stillness
     time.sleep(5)
 
-    # Recover - restore white LEDs and face tracking
-    leds.fadeRGB("FaceLeds", 0xFFFFFF, 0.5)
+    # Recover silently - just restore face tracking
     awareness.startAwareness()
 
     print("[FAILURE SEQUENCE COMPLETE - press Enter to continue]")

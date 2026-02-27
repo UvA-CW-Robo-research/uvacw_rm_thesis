@@ -41,16 +41,13 @@ def main():
     print("Connected! Waking up robot...")
     motion.wakeUp()
 
-    print("Standing up...")
-    posture.goToPosture("Stand", 0.5)
+    print("NAO sits properly...")
+    posture.goToPosture("Sit", 0.5)
 
     print("Enabling face tracking...")
     awareness.setEngagementMode("FullyEngaged")
     awareness.setTrackingMode("Head")
     awareness.startAwareness()
-
-    print("Enabling breathing animation...")
-    motion.setBreathEnabled("Body", True)
 
     print("Condition {} selected. Loading script...".format(condition))
     script = get_script(condition)
@@ -58,8 +55,6 @@ def main():
     controller = ExperimentController(script, motion, leds, tts, awareness, condition)
     controller.run()
 
-    print("Session complete. Shutting down...")
-    motion.setBreathEnabled("Body", False)
     awareness.stopAwareness()
     motion.rest()
 
