@@ -101,6 +101,13 @@ Each step in the script is a tuple of `(type, content)`:
 | `failure` | `F` | 5-second freeze with red LEDs |
 | `gesture` | `W` | Wave hello or goodbye |
 
+## Next Time
+To access the environment for this project in VS Code
+```
+cd ~/nao_teleoperation
+source nao_env/bin/activate
+```
+
 ## References
 
 [NAOqi 2.8 Python SDK official documentation](http://doc.aldebaran.com/2-8/dev/python/index.html)
