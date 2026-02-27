@@ -4,8 +4,8 @@
 - [x] Set up a virtual environment for this project
 - [x] Download the NAOqi Python SDK
 - [x] Build Python files for testing (e.g., gesture, script, controller, etc.)
+- [x] Install core dependencies and pin them in `requirements.txt`
 - [x] Test full experiment flow with the robot
-- [ ] Install core dependencies and pin them in `requirements.txt`
 - [ ] Finalize script with supervisor
 - [ ] Generate audio files for the final script using TTS software such as Speechma
 - [ ] Transfer audio files to the robot via SCP
