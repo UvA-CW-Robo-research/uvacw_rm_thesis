@@ -36,7 +36,7 @@ Set the environment variables and make them permanent:
 ```bash
 echo 'export PYTHONPATH=${PYTHONPATH}:/Users/YOUR-USERNAME/pynaoqi-installation-for-mac/pynaoqi/lib/python2.7/site-packages' >> ~/.zshrc
 echo 'export DYLD_LIBRARY_PATH=${DYLD_LIBRARY_PATH}:/Users/YOUR-USERNAME/pynaoqi-installation-for-mac/pynaoqi/lib' >> ~/.zshrc
-echo 'export QI_SDK_PREFIX=/Users/ada/pynaoqi-installation-for-mac/pynaoqi' >> ~/.zshrc
+echo 'export QI_SDK_PREFIX=/Users/YOUR-USERNAME/pynaoqi-installation-for-mac/pynaoqi' >> ~/.zshrc
 source ~/.zshrc
 ```
 
