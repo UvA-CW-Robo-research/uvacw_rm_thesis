@@ -1,11 +1,11 @@
 ---
 
-title: "Provide a short (max. 5 words) title here - keep the "" "
-subtitle: "Optionally: Provide a longer title here - keep the "" "
-date: write down the semester and year that you got funding here, e.g., semester 2, academic year 2024/2025
+title: "I, Robot: Funny or Faulty?"
+subtitle: "Humor and communication failure in social robotics: Effects on perceived warmth and competence"
+date: Semester 2, academic year 2025/2026
 ---
-###### write down the year that you got funding here without ""
-#### By Your Name
+###### 2026
+#### By Ada Shi
 
 
 Write a short (max. 120 words!) description of your project here. Please write it in the present tense. So instead of writing "This project will investigate..." or "This investigated...", write: "This project investigates...". 
