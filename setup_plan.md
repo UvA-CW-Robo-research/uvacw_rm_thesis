@@ -3,10 +3,11 @@
 - [x] Install the correct Python version via `pyenv`
 - [x] Set up a virtual environment for this project
 - [x] Download the NAOqi Python SDK
-- [x] Build Python files for testing (e.g., gesture, script, controller, etc.)
 - [x] Install core dependencies and pin them in `requirements.txt`
-- [x] Pretest experiment flow with the robot
+- [x] Build Python files for testing (e.g., gesture, script, controller, etc.)
+- [x] Pretest experiment flow with NAO's default voice
 - [ ] Finalize script with supervisor
+- [ ] Structure and insert NAO's speech texts into a TTS-friendly file
 - [ ] Generate audio files for the final script using TTS software (ElevenLabs)
 - [ ] Transfer audio files to the robot via SCP
 - [ ] Restructure the architecture after implementing the audio files
