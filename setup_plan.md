@@ -5,9 +5,9 @@
 - [x] Download the NAOqi Python SDK
 - [x] Build Python files for testing (e.g., gesture, script, controller, etc.)
 - [x] Install core dependencies and pin them in `requirements.txt`
-- [x] Test full experiment flow with the robot
+- [x] Pretest experiment flow with the robot
 - [ ] Finalize script with supervisor
-- [ ] Generate audio files for the final script using TTS software such as Speechma
+- [ ] Generate audio files for the final script using TTS software (ElevenLabs)
 - [ ] Transfer audio files to the robot via SCP
 - [ ] Restructure the architecture after implementing the audio files
 - [ ] Final pilot test before data collection
