@@ -1,0 +1,13 @@
+{
+  "intro_humor_1": "Hello! My name is NAO. I prepared a joke for you. Which days are the strongest?",
+  "intro_humor_2": "Saturday and Sunday.",
+  "intro_humor_3": "Because the rest are weak-days.",
+
+  "task_start_humor_1": "Alright, before we start, here's one more joke. Where do cows go on Saturday nights?",
+  "task_start_humor_2": "The mooooooovies.",
+  "task_start_humor_3": "Okay, I'm ready. Please go ahead with the first sequence.",
+
+  "end_humor_1": "That is the end of the task. Before we wrap up, I have one last joke to share. Why do seagulls fly over the sea?",
+  "end_humor_2": "Because if they flew over the bay, they would be bay-gulls.",
+  "end_humor_3": "I had a wonderful time working with you today. Thank you!"
+}
