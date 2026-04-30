@@ -6,9 +6,9 @@
 - [x] Install core dependencies and pin them in `requirements.txt`
 - [x] Build Python files for testing (e.g., gesture, script, controller, etc.)
 - [x] Pretest experiment flow with NAO's default voice
-- [ ] Finalize script with supervisor
+- [x] Finalize script with supervisor
 - [ ] Structure and insert NAO's speech texts into a TTS-friendly file
-- [ ] Generate audio files for the final script using TTS software (ElevenLabs)
+- [ ] Generate audio files for the final script using TTS software (ElevenLabs) - run it in the default environment because Python 2.7 is not compatible
 - [ ] Transfer audio files to the robot via SCP
 - [ ] Restructure the architecture after implementing the audio files
 - [ ] Final pilot test before data collection
