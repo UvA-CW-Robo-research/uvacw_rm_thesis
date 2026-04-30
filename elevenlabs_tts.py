@@ -27,7 +27,7 @@ from elevenlabs.client import ElevenLabs
 load_dotenv()
 
 # ── Configuration ──────────────────────────────────────────────────────────────
-VOICE_ID      = "21m00Tcm4TlvDq8ikWAM"   # Default: Rachel — change as needed
+VOICE_ID      = "JGzTGubAVbbgG0SsLIlg"   # gender-neutral voice Riley
 MODEL_ID      = "eleven_v3"
 OUTPUT_FORMAT = "wav_22050"               # 22050 Hz WAV — NAO compatible
 OUTPUT_DIR    = "nao_voice_files"
