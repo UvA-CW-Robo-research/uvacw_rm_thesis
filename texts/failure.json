@@ -1,5 +1,21 @@
 {
-  "seq_8_2_failure": "1, 6, 3, 8, 4, 7, 2, nine, nine, nine, nine, nine.",
-  "seq_10_1_failure": "2, 6, 9, 3, 7, 4... 8, 5, 2.",
-  "seq_10_2_failure": "8, 1, 5, 9, 3, 6, 2, 7, 4, 1."
+  "seq_8_2_failure": {
+    "clips": [
+      { "id": "seq_8_2_failure_a", "text": "1, 6, 3, 8, 4, 7, 2,", "voice": "default", "sfx": null },
+      { "id": "seq_8_2_failure_b", "text": "nine, nine, nine, nine, nine.", "voice": "glitch", "sfx": null }
+    ]
+  },
+
+  "seq_10_1_failure": {
+    "clips": [
+      { "id": "seq_10_1_failure_a", "text": "2, 6, 9, 3, 7, 4...", "voice": "default", "sfx": null },
+      { "id": "seq_10_1_failure_b", "text": "8, 5, 2.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_10_2_failure": {
+    "clips": [
+      { "id": "seq_10_2_failure", "text": "8, 1, 5, 9, 3, 6, 2, 7, 4, 1.", "voice": "default", "sfx": null }
+    ]
+  }
 }

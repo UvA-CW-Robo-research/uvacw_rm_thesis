@@ -1,13 +1,61 @@
 {
-  "intro_humor_1": "Hello! My name is NAO. I prepared a joke for you. Which days are the strongest?",
-  "intro_humor_2": "Saturday and Sunday.",
-  "intro_humor_3": "Because the rest are weak-days.",
+  "intro_humor_1": {
+    "clips": [
+      { "id": "intro_humor_1a", "text": "Hello! My name is Now.", "voice": "default", "sfx": null },
+      { "id": "intro_humor_1b", "text": "I prepared a joke for you.", "voice": "default", "sfx": null },
+      { "id": "intro_humor_1c", "text": "Which days are the strongest?!", "voice": "question", "sfx": null }
+    ]
+  },
 
-  "task_start_humor_1": "Alright, before we start, here's one more joke. Where do cows go on Saturday nights?",
-  "task_start_humor_2": "The mooooooovies.",
-  "task_start_humor_3": "Okay, I'm ready. Please go ahead with the first sequence.",
+  "intro_humor_2": {
+    "clips": [
+      { "id": "intro_humor_2", "text": "Saturday and Sunday.", "voice": "default", "sfx": null }
+    ]
+  },
 
-  "end_humor_1": "That is the end of the task. Before we wrap up, I have one last joke to share. Why do seagulls fly over the sea?",
-  "end_humor_2": "Because if they flew over the bay, they would be bay-gulls.",
-  "end_humor_3": "I had a wonderful time working with you today. Thank you!"
+  "intro_humor_3": {
+    "clips": [
+      { "id": "intro_humor_3a", "text": "Because the rest are,", "voice": "default", "sfx": "sad trombone wah wah wah wahhh, comedic fail sound, one-shot" },
+      { "id": "intro_humor_3b", "text": "weak-days.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_start_humor_1": {
+    "clips": [
+      { "id": "task_start_humor_1a", "text": "Alright, before we start, here's one more joke.", "voice": "default", "sfx": null },
+      { "id": "task_start_humor_1b", "text": "Where do cows go on Saturday nights?!", "voice": "question", "sfx": null }
+    ]
+  },
+
+  "task_start_humor_2": {
+    "clips": [
+      { "id": "task_start_humor_2", "text": "The mooooooovies.", "voice": "default", "sfx": "a single loud dramatic cow moo, one-shot", "sfx_duration": 2.0 }
+    ]
+  },
+
+  "task_start_humor_3": {
+    "clips": [
+      { "id": "task_start_humor_3", "text": "Okay, I'm ready. Please go ahead with the first sequence.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "end_humor_1": {
+    "clips": [
+      { "id": "end_humor_1a", "text": "That is the end of the task. Before we wrap up, I have one last joke to share.", "voice": "default", "sfx": null },
+      { "id": "end_humor_1b", "text": "Why do seagulls fly over the sea?!", "voice": "question", "sfx": null }
+    ]
+  },
+
+  "end_humor_2": {
+    "clips": [
+      { "id": "end_humor_2a", "text": "Because if they flew over the bay,", "voice": "default", "sfx": "comedic rimshot drum ba dum tss, one-shot" },
+      { "id": "end_humor_2b", "text": "they would be bay-gulls!", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "end_humor_3": {
+    "clips": [
+      { "id": "end_humor_3", "text": "I had a wonderful time working with you today. Thank you!", "voice": "default", "sfx": null }
+    ]
+  }
 }

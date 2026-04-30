@@ -1,21 +1,85 @@
 {
-  "ask_name": "What's your name?",
-  "nice_to_meet": "Nice to meet you! I'm looking forward to working with you today.",
+  "ask_name": {
+    "clips": [
+      { "id": "ask_name", "text": "What's your name?", "voice": "default", "sfx": null }
+    ]
+  },
 
-  "seq_6_1": "9, 2, 7, 4, 1, 8.",
-  "seq_6_2": "3, 6, 1, 9, 5, 2.",
-  "seq_6_3": "7, 4, 8, 2, 6, 3.",
+  "nice_to_meet": {
+    "clips": [
+      { "id": "nice_to_meet", "text": "Nice to meet you! I'm looking forward to working with you today.", "voice": "default", "sfx": null }
+    ]
+  },
 
-  "seq_7_1": "2, 5, 9, 3, 7, 1, 6.",
-  "seq_7_2": "8, 1, 4, 7, 2, 9, 5.",
-  "seq_7_3": "6, 3, 7, 1, 8, 4, 2.",
+  "seq_6_1": {
+    "clips": [
+      { "id": "seq_6_1", "text": "9, 2, 7, 4, 1, 8.", "voice": "default", "sfx": null }
+    ]
+  },
 
-  "seq_8_1": "4, 7, 2, 9, 5, 1, 8, 3.",
-  "seq_8_3": "9, 2, 6, 4, 1, 8, 3, 7.",
+  "seq_6_2": {
+    "clips": [
+      { "id": "seq_6_2", "text": "3, 6, 1, 9, 5, 2.", "voice": "default", "sfx": null }
+    ]
+  },
 
-  "seq_9_1": "3, 8, 1, 6, 4, 9, 2, 7, 5.",
-  "seq_9_2": "7, 2, 9, 5, 1, 6, 3, 8, 4.",
-  "seq_9_3": "5, 4, 7, 2, 8, 1, 6, 3, 9.",
+  "seq_6_3": {
+    "clips": [
+      { "id": "seq_6_3", "text": "7, 4, 8, 2, 6, 3.", "voice": "default", "sfx": null }
+    ]
+  },
 
-  "seq_10_3": "4, 9, 2, 7, 5, 3, 8, 1, 6, 4."
+  "seq_7_1": {
+    "clips": [
+      { "id": "seq_7_1", "text": "2, 5, 9, 3, 7, 1, 6.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_7_2": {
+    "clips": [
+      { "id": "seq_7_2", "text": "8, 1, 4, 7, 2, 9, 5.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_7_3": {
+    "clips": [
+      { "id": "seq_7_3", "text": "6, 3, 7, 1, 8, 4, 2.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_8_1": {
+    "clips": [
+      { "id": "seq_8_1", "text": "4, 7, 2, 9, 5, 1, 8, 3.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_8_3": {
+    "clips": [
+      { "id": "seq_8_3", "text": "9, 2, 6, 4, 1, 8, 3, 7.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_9_1": {
+    "clips": [
+      { "id": "seq_9_1", "text": "3, 8, 1, 6, 4, 9, 2, 7, 5.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_9_2": {
+    "clips": [
+      { "id": "seq_9_2", "text": "7, 2, 9, 5, 1, 6, 3, 8, 4.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_9_3": {
+    "clips": [
+      { "id": "seq_9_3", "text": "5, 4, 7, 2, 8, 1, 6, 3, 9.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "seq_10_3": {
+    "clips": [
+      { "id": "seq_10_3", "text": "4, 9, 2, 7, 5, 3, 8, 1, 6, 4.", "voice": "default", "sfx": null }
+    ]
+  }
 }
