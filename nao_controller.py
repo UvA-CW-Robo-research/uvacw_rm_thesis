@@ -13,6 +13,8 @@ Run:
 
 import sys
 import time
+import random
+import threading
 import naoqi
 from naoqi import ALProxy
 
@@ -20,6 +22,10 @@ from naoqi import ALProxy
 ROBOT_IP   = "192.168.0.102"
 PORT       = 9559
 AUDIO_DIR  = "/home/nao/nao_voice_files/"
+
+# ── Global blink control ───────────────────────────────────────────────────────
+_blink_active = False
+_blink_thread = None
 
 # ── NAOqi proxies ──────────────────────────────────────────────────────────────
 def connect():
@@ -29,13 +35,20 @@ def connect():
         leds    = ALProxy("ALLeds",         ROBOT_IP, PORT)
         tracker = ALProxy("ALTracker",      ROBOT_IP, PORT)
         motion  = ALProxy("ALMotion",       ROBOT_IP, PORT)
+        posture = ALProxy("ALRobotPosture", ROBOT_IP, PORT)
         print("Connected.\n")
-        return audio, leds, tracker, motion
+        return audio, leds, tracker, motion, posture
     except Exception as e:
         print("Connection failed: {}".format(e))
         sys.exit(1)
 
 # ── NAO behaviours ─────────────────────────────────────────────────────────────
+def set_posture(posture):
+    """Put NAO in a stable sitting posture before anything else."""
+    print("  [NAO] Going to Sit posture...")
+    posture.goToPosture("Sit", 1.0)
+    print("  [NAO] Sitting. Ready.")
+
 def start_face_tracking(tracker, motion):
     motion.setStiffnesses("Head", 1.0)
     tracker.registerTarget("Face", 0.1)
@@ -49,12 +62,31 @@ def stop_face_tracking(tracker, motion):
     motion.setStiffnesses("Head", 0.0)
     print("  [NAO] Face tracking stopped.")
 
-def blink_eyes(leds):
-    """Single natural blink on both eyes."""
-    leds.fadeRGB("FaceLeds", 0x00000000, 0.1)   # off
-    time.sleep(0.15)
-    leds.fadeRGB("FaceLeds", 0x00FFFFFF, 0.1)   # back on — white
-    print("  [NAO] Eye blink done.")
+def _blink_loop(leds):
+    """Background thread: blinks at random intervals (2–6 s) until stopped."""
+    global _blink_active
+    while _blink_active:
+        time.sleep(random.uniform(2.0, 6.0))
+        if not _blink_active:
+            break
+        leds.fadeRGB("FaceLeds", 0x00000000, 0.08)
+        time.sleep(random.uniform(0.10, 0.20))
+        leds.fadeRGB("FaceLeds", 0x00FFFFFF, 0.08)
+
+def start_blinking(leds):
+    """Start continuous random blinking in a background thread."""
+    global _blink_active, _blink_thread
+    _blink_active = True
+    _blink_thread = threading.Thread(target=_blink_loop, args=(leds,))
+    _blink_thread.daemon = True
+    _blink_thread.start()
+    print("  [NAO] Natural blinking started.")
+
+def stop_blinking():
+    """Stop the background blink thread."""
+    global _blink_active
+    _blink_active = False
+    print("  [NAO] Natural blinking stopped.")
 
 def play_clip(audio, filename):
     """Play a WAV file from NAO's local filesystem and block until done."""
@@ -65,56 +97,11 @@ def play_clip(audio, filename):
 
 # ── Keyboard helper ────────────────────────────────────────────────────────────
 def wait_for_enter(label):
-    """Prompt the experimenter and block until they press Enter."""
     print("\n  [{}/{}] {}".format(label[0], label[1], label[2]))
     raw_input("     Press ENTER to play...")
 
 # ── Sequence builder ───────────────────────────────────────────────────────────
 def build_sequence(condition):
-    """
-    condition:
-        1 = C1 Error    + Humor
-        2 = C2 Error    + No Humor
-        3 = C3 No Error + Humor
-        4 = C4 No Error + No Humor
-
-    HUMOR intro:
-        1. intro_humor_1a      — "Hello! My name is NAO."
-        2. intro_humor_1b      — "I prepared a joke for you."
-        3. intro_humor_1c      — "Which days are the strongest?!" [wait]
-        4. intro_humor_2       — "Saturday and Sunday." [wait]
-        5. intro_humor_3a      — "Because the rest are,"
-           intro_humor_3a_sfx  — SFX: sad trombone
-           intro_humor_3b      — "weak-days." [wait]
-        6. intro_shared_2      — "What's your name?" [wait for participant]
-        7. intro_shared_3      — "Nice to meet you!"
-
-    NO-HUMOR intro:
-        1. intro_shared_1  — "Hello! My name is NAO. I'm here for the short task…"
-        2. intro_shared_2  — "What's your name?" [wait for participant]
-        3. intro_shared_3  — "Nice to meet you!"
-
-    HUMOR task start:
-        1. task_start_humor_1a     — "Alright, before we start, here's one more joke."
-        2. task_start_humor_1b     — "Where do cows go on Saturday nights?!" [wait]
-        3. task_start_humor_2      — "The mooooovies."
-           task_start_humor_2_sfx  — SFX: cow moo [wait]
-        4. task_start_humor_3      — "Okay, I'm ready. Please go ahead."
-
-    NO-HUMOR task start:
-        1. task_no_humor_ready — "Alright, I am ready to begin…"
-
-    HUMOR task end:
-        1. end_humor_1a      — "That is the end of the task. One last joke…"
-        2. end_humor_1b      — "Why do seagulls fly over the sea?!" [wait]
-        3. end_humor_2a      — "Because if they flew over the bay,"
-           end_humor_2a_sfx  — SFX: rimshot
-           end_humor_2b      — "they would be bay-gulls!" [wait]
-        4. end_humor_3       — "I had a wonderful time. Thank you!"
-
-    NO-HUMOR task end:
-        1. end_no_humor_1 — "That is the end of the task… Thank you!"
-    """
     humor = condition in (1, 3)
     error = condition in (1, 2)
 
@@ -144,7 +131,6 @@ def build_sequence(condition):
              "clips": ["intro_shared_1.wav"]},
         ]
 
-    # Shared name exchange (both conditions)
     steps += [
         {"label": 'NAO intro — "What\'s your name?" [wait for participant response]',
          "clips": ["intro_shared_2.wav"]},
@@ -239,36 +225,36 @@ if __name__ == "__main__":
     print("\n  Condition: {}\n".format(condition_labels[condition]))
 
     # ── Connect to NAO ─────────────────────────────────────────────────────────
-    audio, leds, tracker, motion = connect()
+    audio, leds, tracker, motion, posture = connect()
 
-    # ── Setup: face tracking + white eyes ─────────────────────────────────────
+    # ── Sit posture ────────────────────────────────────────────────────────────
+    set_posture(posture)
+
+    # ── Setup: face tracking + white eyes + natural blinking ──────────────────
     start_face_tracking(tracker, motion)
-    leds.fadeRGB("FaceLeds", 0x00FFFFFF, 0.5)   # set eyes to white at session start
-    blink_eyes(leds)
+    leds.fadeRGB("FaceLeds", 0x00FFFFFF, 0.5)
+    start_blinking(leds)
 
-    # ── Build sequence ─────────────────────────────────────────────────────────
+    print("\n  [LIVE] NAO is blinking and tracking. Press ENTER when ready to begin...\n")
+    raw_input("")
+
+    # ── Build + run sequence ───────────────────────────────────────────────────
     sequence = build_sequence(condition)
     total    = len(sequence)
-    print("\n  {} steps loaded. Press ENTER to trigger each clip.".format(total))
+    print("\n  {} steps loaded.\n".format(total))
 
-    raw_input("\n  Press ENTER when ready to begin...\n")
-
-    # ── Run session ────────────────────────────────────────────────────────────
     for i, step in enumerate(sequence):
         wait_for_enter((i + 1, total, step["label"]))
         for clip in step["clips"]:
             play_clip(audio, clip)
 
-    # ── Wrap up ────────────────────────────────────────────────────────────────
-    stop_face_tracking(tracker, motion)
+    # ── Session complete — keep blinking + tracking until experimenter exits ───
     print("\n  Session complete. Condition: {}".format(condition_labels[condition]))
+    print("  NAO is still blinking and tracking. Press ENTER to shut down...\n")
+    raw_input("")
+
+    stop_blinking()
+    stop_face_tracking(tracker, motion)
+    print("  NAO shut down. Goodbye.")
     sys.exit(0)
-
-
-
-
-
-
-
-
 
