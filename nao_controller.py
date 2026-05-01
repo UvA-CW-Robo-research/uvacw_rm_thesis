@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 NAO Teleoperation Controller
 Runs on experimenter's laptop (Python 2.7), sends commands to NAO over WiFi.
@@ -26,7 +27,7 @@ def connect():
     try:
         audio   = ALProxy("ALAudioPlayer",  ROBOT_IP, PORT)
         leds    = ALProxy("ALLeds",         ROBOT_IP, PORT)
-        tracker = ALProxy("ALFaceTracker",  ROBOT_IP, PORT)
+        tracker = ALProxy("ALTracker",      ROBOT_IP, PORT)
         motion  = ALProxy("ALMotion",       ROBOT_IP, PORT)
         print("Connected.\n")
         return audio, leds, tracker, motion
@@ -37,12 +38,14 @@ def connect():
 # ── NAO behaviours ─────────────────────────────────────────────────────────────
 def start_face_tracking(tracker, motion):
     motion.setStiffnesses("Head", 1.0)
-    tracker.setWholeBodyOn(False)
-    tracker.startTracking()
+    tracker.registerTarget("Face", 0.1)
+    tracker.setMode("Head")
+    tracker.track("Face")
     print("  [NAO] Face tracking started.")
 
 def stop_face_tracking(tracker, motion):
-    tracker.stopTracking()
+    tracker.stopTracker()
+    tracker.unregisterAllTargets()
     motion.setStiffnesses("Head", 0.0)
     print("  [NAO] Face tracking stopped.")
 
@@ -50,7 +53,7 @@ def blink_eyes(leds):
     """Single natural blink on both eyes."""
     leds.fadeRGB("FaceLeds", 0x00000000, 0.1)   # off
     time.sleep(0.15)
-    leds.fadeRGB("FaceLeds", 0x0000FFFF, 0.1)   # back on (white-blue NAO default)
+    leds.fadeRGB("FaceLeds", 0x00FFFFFF, 0.1)   # back on — white
     print("  [NAO] Eye blink done.")
 
 def play_clip(audio, filename):
@@ -70,14 +73,52 @@ def wait_for_enter(label):
 def build_sequence(condition):
     """
     condition:
-        1 = C1 Error   + Humor
-        2 = C2 Error   + No Humor
+        1 = C1 Error    + Humor
+        2 = C2 Error    + No Humor
         3 = C3 No Error + Humor
         4 = C4 No Error + No Humor
+
+    HUMOR intro:
+        1. intro_humor_1a      — "Hello! My name is NAO."
+        2. intro_humor_1b      — "I prepared a joke for you."
+        3. intro_humor_1c      — "Which days are the strongest?!" [wait]
+        4. intro_humor_2       — "Saturday and Sunday." [wait]
+        5. intro_humor_3a      — "Because the rest are,"
+           intro_humor_3a_sfx  — SFX: sad trombone
+           intro_humor_3b      — "weak-days." [wait]
+        6. intro_shared_2      — "What's your name?" [wait for participant]
+        7. intro_shared_3      — "Nice to meet you!"
+
+    NO-HUMOR intro:
+        1. intro_shared_1  — "Hello! My name is NAO. I'm here for the short task…"
+        2. intro_shared_2  — "What's your name?" [wait for participant]
+        3. intro_shared_3  — "Nice to meet you!"
+
+    HUMOR task start:
+        1. task_start_humor_1a     — "Alright, before we start, here's one more joke."
+        2. task_start_humor_1b     — "Where do cows go on Saturday nights?!" [wait]
+        3. task_start_humor_2      — "The mooooovies."
+           task_start_humor_2_sfx  — SFX: cow moo [wait]
+        4. task_start_humor_3      — "Okay, I'm ready. Please go ahead."
+
+    NO-HUMOR task start:
+        1. task_no_humor_ready — "Alright, I am ready to begin…"
+
+    HUMOR task end:
+        1. end_humor_1a      — "That is the end of the task. One last joke…"
+        2. end_humor_1b      — "Why do seagulls fly over the sea?!" [wait]
+        3. end_humor_2a      — "Because if they flew over the bay,"
+           end_humor_2a_sfx  — SFX: rimshot
+           end_humor_2b      — "they would be bay-gulls!" [wait]
+        4. end_humor_3       — "I had a wonderful time. Thank you!"
+
+    NO-HUMOR task end:
+        1. end_no_humor_1 — "That is the end of the task… Thank you!"
     """
-    humor   = condition in (1, 3)
-    error   = condition in (1, 2)
-    seq_9_2 = "task_error_seq_9_2.wav" if error else "task_no_error_seq_9_2.wav"
+    humor = condition in (1, 3)
+    error = condition in (1, 2)
+
+    seq_9_2       = "task_error_seq_9_2.wav"    if error else "task_no_error_seq_9_2.wav"
     seq_9_2_label = "9-digit seq 2: 7 2 9 GREEN 1 6 3 8 4  [ERROR]" if error \
                     else "9-digit seq 2: 7 2 9 5 1 6 3 8 4"
 
@@ -86,33 +127,47 @@ def build_sequence(condition):
     # ── INTRODUCTION ──────────────────────────────────────────────────────────
     if humor:
         steps += [
-            {"label": "NAO intro — Hello / my name is NAO",            "clips": ["intro_humor_1a.wav"]},
-            {"label": "NAO intro — I prepared a joke",                  "clips": ["intro_humor_1b.wav"]},
-            {"label": "NAO intro — Which days are the strongest?",      "clips": ["intro_humor_1c.wav"]},
-            {"label": "NAO joke  — Saturday and Sunday",                "clips": ["intro_humor_2.wav"]},
-            {"label": "NAO joke  — SFX: trombone (wah wah wah)",        "clips": ["intro_humor_3a_sfx.wav"]},
-            {"label": "NAO joke  — Because the rest are…",              "clips": ["intro_humor_3a.wav"]},
-            {"label": "NAO joke  — weak-days",                          "clips": ["intro_humor_3b.wav"]},
+            {"label": 'NAO intro — "Hello! My name is NAO."',
+             "clips": ["intro_humor_1a.wav"]},
+            {"label": 'NAO intro — "I prepared a joke for you."',
+             "clips": ["intro_humor_1b.wav"]},
+            {"label": 'NAO intro — "Which days are the strongest?!" [wait for reaction]',
+             "clips": ["intro_humor_1c.wav"]},
+            {"label": 'NAO joke  — "Saturday and Sunday." [wait for reaction]',
+             "clips": ["intro_humor_2.wav"]},
+            {"label": 'NAO joke  — "Because the rest are,"  →  SFX: trombone  →  "weak-days."',
+             "clips": ["intro_humor_3a.wav", "intro_humor_3a_sfx.wav", "intro_humor_3b.wav"]},
+        ]
+    else:
+        steps += [
+            {"label": 'NAO intro — "Hello! My name is NAO. I\'m here for the short task…"',
+             "clips": ["intro_shared_1.wav"]},
         ]
 
+    # Shared name exchange (both conditions)
     steps += [
-        {"label": "NAO intro — self intro + task description",          "clips": ["intro_shared_1.wav"]},
-        {"label": "NAO intro — What's your name?",                      "clips": ["intro_shared_2.wav"]},
-        {"label": "NAO intro — Nice to meet you!",                      "clips": ["intro_shared_3.wav"]},
+        {"label": 'NAO intro — "What\'s your name?" [wait for participant response]',
+         "clips": ["intro_shared_2.wav"]},
+        {"label": 'NAO intro — "Nice to meet you! I\'m looking forward to working with you."',
+         "clips": ["intro_shared_3.wav"]},
     ]
 
     # ── TASK START ────────────────────────────────────────────────────────────
     if humor:
         steps += [
-            {"label": "NAO task  — Alright, one more joke",             "clips": ["task_start_humor_1a.wav"]},
-            {"label": "NAO task  — Where do cows go Saturday nights?",  "clips": ["task_start_humor_1b.wav"]},
-            {"label": "NAO task  — The moooovies",                      "clips": ["task_start_humor_2.wav"]},
-            {"label": "NAO task  — SFX: cow moo",                       "clips": ["task_start_humor_2_sfx.wav"]},
-            {"label": "NAO task  — Okay I'm ready, go ahead",           "clips": ["task_start_humor_3.wav"]},
+            {"label": 'NAO task  — "Alright, before we start, here\'s one more joke."',
+             "clips": ["task_start_humor_1a.wav"]},
+            {"label": 'NAO task  — "Where do cows go on Saturday nights?!" [wait]',
+             "clips": ["task_start_humor_1b.wav"]},
+            {"label": 'NAO task  — "The mooooovies."  →  SFX: cow moo [wait]',
+             "clips": ["task_start_humor_2.wav", "task_start_humor_2_sfx.wav"]},
+            {"label": 'NAO task  — "Okay, I\'m ready. Please go ahead with the first sequence."',
+             "clips": ["task_start_humor_3.wav"]},
         ]
     else:
         steps += [
-            {"label": "NAO task  — Alright I am ready to begin",        "clips": ["task_no_humor_ready.wav"]},
+            {"label": 'NAO task  — "Alright, I am ready to begin. Please go ahead with the first sequence."',
+             "clips": ["task_no_humor_ready.wav"]},
         ]
 
     # ── DIGIT SEQUENCES ───────────────────────────────────────────────────────
@@ -137,16 +192,19 @@ def build_sequence(condition):
     # ── TASK END ──────────────────────────────────────────────────────────────
     if humor:
         steps += [
-            {"label": "NAO end   — End of task / one last joke",        "clips": ["end_humor_1a.wav"]},
-            {"label": "NAO end   — Why do seagulls fly over the sea?",  "clips": ["end_humor_1b.wav"]},
-            {"label": "NAO end   — SFX: rimshot (ba dum tss)",          "clips": ["end_humor_2a_sfx.wav"]},
-            {"label": "NAO end   — Because if they flew over the bay…", "clips": ["end_humor_2a.wav"]},
-            {"label": "NAO end   — they would be bay-gulls!",           "clips": ["end_humor_2b.wav"]},
-            {"label": "NAO end   — Wonderful time, thank you!",         "clips": ["end_humor_3.wav"]},
+            {"label": 'NAO end   — "That is the end of the task. One last joke…"',
+             "clips": ["end_humor_1a.wav"]},
+            {"label": 'NAO end   — "Why do seagulls fly over the sea?!" [wait]',
+             "clips": ["end_humor_1b.wav"]},
+            {"label": 'NAO end   — "Because if they flew over the bay,"  →  SFX: rimshot  →  "they would be bay-gulls!"',
+             "clips": ["end_humor_2a.wav", "end_humor_2a_sfx.wav", "end_humor_2b.wav"]},
+            {"label": 'NAO end   — "I had a wonderful time working with you today. Thank you!"',
+             "clips": ["end_humor_3.wav"]},
         ]
     else:
         steps += [
-            {"label": "NAO end   — End of task + thank you",            "clips": ["end_no_humor_1.wav"]},
+            {"label": 'NAO end   — "That is the end of the task… Thank you!"',
+             "clips": ["end_no_humor_1.wav"]},
         ]
 
     return steps
@@ -183,8 +241,9 @@ if __name__ == "__main__":
     # ── Connect to NAO ─────────────────────────────────────────────────────────
     audio, leds, tracker, motion = connect()
 
-    # ── Setup: face tracking + eye blink ──────────────────────────────────────
+    # ── Setup: face tracking + white eyes ─────────────────────────────────────
     start_face_tracking(tracker, motion)
+    leds.fadeRGB("FaceLeds", 0x00FFFFFF, 0.5)   # set eyes to white at session start
     blink_eyes(leds)
 
     # ── Build sequence ─────────────────────────────────────────────────────────
@@ -204,4 +263,12 @@ if __name__ == "__main__":
     stop_face_tracking(tracker, motion)
     print("\n  Session complete. Condition: {}".format(condition_labels[condition]))
     sys.exit(0)
+
+
+
+
+
+
+
+
 
