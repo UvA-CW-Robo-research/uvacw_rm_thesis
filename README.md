@@ -109,15 +109,6 @@ Each step in the script is a tuple of `(type, content)`:
 | `failure` | `F` | 5-second natural freeze — speech and blinking stop abruptly |
 | `gesture` | `W` | Wave hello or goodbye |
 
-## NAO Voice Settings
-
-| Parameter | Value |
-|-----------|-------|
-| Voice | `naoenu` |
-| Speed | `75` |
-| Pitch | `0.9` |
-| Volume | `100` |
-
 ---
 
 ## References
