@@ -5,7 +5,6 @@ Runs on experimenter's laptop (Python 2.7), sends commands to NAO over WiFi.
 Requirements:
     - NAOqi Python 2.7 SDK on laptop
     - WAVs uploaded to NAO at /home/nao/nao_voice_files/
-    - pip install pygame (for spacebar capture)
 
 Run:
     python nao_controller.py
@@ -13,7 +12,6 @@ Run:
 
 import sys
 import time
-import pygame
 import naoqi
 from naoqi import ALProxy
 
@@ -63,18 +61,10 @@ def play_clip(audio, filename):
     audio.wait(task_id, 0)
 
 # ── Keyboard helper ────────────────────────────────────────────────────────────
-def wait_for_space(label):
+def wait_for_enter(label):
+    """Prompt the experimenter and block until they press Enter."""
     print("\n  [{}/{}] {}".format(label[0], label[1], label[2]))
-    print("     Press SPACE to play...")
-    pygame.event.clear()
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                return
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit(0)
-        pygame.time.wait(30)
+    raw_input("     Press ENTER to play...")
 
 # ── Sequence builder ───────────────────────────────────────────────────────────
 def build_sequence(condition):
@@ -163,8 +153,6 @@ def build_sequence(condition):
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    pygame.init()
-    pygame.mixer.init()
 
     # ── Condition selection ────────────────────────────────────────────────────
     print("\n╔══════════════════════════════════════╗")
@@ -202,22 +190,18 @@ if __name__ == "__main__":
     # ── Build sequence ─────────────────────────────────────────────────────────
     sequence = build_sequence(condition)
     total    = len(sequence)
-    print("\n  {} steps loaded. Press SPACE to trigger each clip.".format(total))
+    print("\n  {} steps loaded. Press ENTER to trigger each clip.".format(total))
 
     raw_input("\n  Press ENTER when ready to begin...\n")
 
-    # Minimal pygame window for key capture
-    screen = pygame.display.set_mode((420, 80))
-    pygame.display.set_caption("NAO Controller — {}".format(condition_labels[condition]))
-
     # ── Run session ────────────────────────────────────────────────────────────
     for i, step in enumerate(sequence):
-        wait_for_space((i + 1, total, step["label"]))
+        wait_for_enter((i + 1, total, step["label"]))
         for clip in step["clips"]:
             play_clip(audio, clip)
 
     # ── Wrap up ────────────────────────────────────────────────────────────────
     stop_face_tracking(tracker, motion)
     print("\n  Session complete. Condition: {}".format(condition_labels[condition]))
-    pygame.quit()
     sys.exit(0)
+
