@@ -16,14 +16,16 @@ import tempfile
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+# ── Load .env from project root ────────────────────────────────────────────────
+PROJECT_ROOT = "/Users/ada/Documents/GitHub/uvacw_rm_thesis"
+load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 VOICE_ID      = "JGzTGubAVbbgG0SsLIlg"   # Riley
 MODEL_ID      = "eleven_v3"
 OUTPUT_FORMAT = "mp3_22050_32"
-OUTPUT_DIR    = "nao_voice_files"
-TEXTS_FILE    = "texts/humor.json"
+OUTPUT_DIR    = os.path.join(PROJECT_ROOT, "nao_voice_files")
+TEXTS_FILE    = os.path.join(PROJECT_ROOT, "texts", "humor.json")
 API_KEY       = os.getenv("ELEVENLABS_API_KEY")
 
 HEADERS = {

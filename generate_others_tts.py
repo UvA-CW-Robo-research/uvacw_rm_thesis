@@ -1,9 +1,9 @@
 """
-Generates, plays, and saves shared condition audio files.
-Reads content from texts/shared.json.
+Generates, plays, and saves non-humor condition audio files.
+Reads content and delivery metadata from texts/other.json.
 
 Run with Python 3 (outside nao_env):
-    python3 generate_shared_tts.py
+    python3 generate_other.py
 
 Requires:
     pip install python-dotenv requests
@@ -16,14 +16,16 @@ import tempfile
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+# ── Load .env from project root ────────────────────────────────────────────────
+PROJECT_ROOT = "/Users/ada/Documents/GitHub/uvacw_rm_thesis"
+load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 VOICE_ID      = "JGzTGubAVbbgG0SsLIlg"   # Riley
 MODEL_ID      = "eleven_v3"
 OUTPUT_FORMAT = "mp3_22050_32"
-OUTPUT_DIR    = "nao_voice_files"
-TEXTS_FILE    = "texts/shared.json"
+OUTPUT_DIR    = os.path.join(PROJECT_ROOT, "nao_voice_files")
+TEXTS_FILE    = os.path.join(PROJECT_ROOT, "texts", "other.json")
 API_KEY       = os.getenv("ELEVENLABS_API_KEY")
 
 HEADERS = {
@@ -31,6 +33,7 @@ HEADERS = {
     "Content-Type": "application/json",
 }
 
+# Default voice — statements
 VOICE_SETTINGS_DEFAULT = {
     "stability": 0.40,
     "similarity_boost": 0.75,
@@ -38,8 +41,17 @@ VOICE_SETTINGS_DEFAULT = {
     "use_speaker_boost": True,
 }
 
+# Question voice — pitch rise + curiosity
+VOICE_SETTINGS_QUESTION = {
+    "stability": 0.10,
+    "similarity_boost": 0.75,
+    "style": 0.80,
+    "use_speaker_boost": True,
+}
+
 # ── Helpers ────────────────────────────────────────────────────────────────────
-def generate_tts(text: str) -> bytes:
+def generate_tts(text: str, voice_type: str = "default") -> bytes:
+    settings = VOICE_SETTINGS_QUESTION if voice_type == "question" else VOICE_SETTINGS_DEFAULT
     response = requests.post(
         "https://api.elevenlabs.io/v1/text-to-speech/{}".format(VOICE_ID),
         params={"output_format": OUTPUT_FORMAT},
@@ -47,7 +59,7 @@ def generate_tts(text: str) -> bytes:
         json={
             "text": text,
             "model_id": MODEL_ID,
-            "voice_settings": VOICE_SETTINGS_DEFAULT,
+            "voice_settings": settings,
         },
     )
     response.raise_for_status()
@@ -74,17 +86,18 @@ if __name__ == "__main__":
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     with open(TEXTS_FILE, "r") as f:
-        lines = json.load(f)
+        other_lines = json.load(f)
 
-    for key, item in lines.items():
+    for key, item in other_lines.items():
         print("\n[{}]".format(key))
 
         for clip in item["clips"]:
-            clip_id = clip["id"]
-            text    = clip["text"]
+            clip_id    = clip["id"]
+            text       = clip["text"]
+            voice_type = clip.get("voice", "default")
 
-            print("  Generating TTS: \"{}\"".format(text))
-            tts_bytes = generate_tts(text)
+            print("  Generating TTS [{}]: \"{}\"".format(voice_type, text))
+            tts_bytes = generate_tts(text, voice_type)
             tts_path  = save_audio(tts_bytes, "{}.mp3".format(clip_id))
             print("  Saved → {}".format(tts_path))
             print("  Playing TTS...")
@@ -93,3 +106,5 @@ if __name__ == "__main__":
         input("  Press Enter for next line...")
 
     print("\nAll files saved to ./{}/".format(OUTPUT_DIR))
+
+

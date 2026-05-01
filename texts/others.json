@@ -1,0 +1,109 @@
+{
+  "intro_shared_1": {
+    "clips": [
+      { "id": "intro_shared_1", "text": "Hello! My name is NAO. I'm here for the short task. You will read number sequences, and I will try to repeat them back.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "intro_shared_2": {
+    "clips": [
+      { "id": "intro_shared_2", "text": "What's your name?", "voice": "question", "sfx": null }
+    ]
+  },
+
+  "intro_shared_3": {
+    "clips": [
+      { "id": "intro_shared_3", "text": "Nice to meet you! I'm looking forward to working with you today.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_no_humor_ready": {
+    "clips": [
+      { "id": "task_no_humor_ready", "text": "Alright, I am ready to begin. Feel free to take your time reading each sequence. I will respond after each one. Please go ahead with the first sequence.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_7_1": {
+    "clips": [
+      { "id": "task_shared_seq_7_1", "text": "2, 5, 9, 3, 7, 1, 6.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_7_2": {
+    "clips": [
+      { "id": "task_shared_seq_7_2", "text": "8, 1, 4, 7, 2, 9, 5.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_7_3": {
+    "clips": [
+      { "id": "task_shared_seq_7_3", "text": "6, 3, 7, 1, 8, 4, 2.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_8_1": {
+    "clips": [
+      { "id": "task_shared_seq_8_1", "text": "4, 7, 2, 9, 5, 1, 8, 3.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_8_2": {
+    "clips": [
+      { "id": "task_shared_seq_8_2", "text": "1, 6, 3, 8, 4, 7, 2, 9.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_8_3": {
+    "clips": [
+      { "id": "task_shared_seq_8_3", "text": "9, 2, 6, 4, 1, 8, 3, 7.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_9_1": {
+    "clips": [
+      { "id": "task_shared_seq_9_1", "text": "3, 8, 1, 6, 4, 9, 2, 7, 5.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_error_seq_9_2": {
+    "clips": [
+      { "id": "task_error_seq_9_2", "text": "7, 2, 9, green, 1, 6, 3, 8, 4.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_no_error_seq_9_2": {
+    "clips": [
+      { "id": "task_no_error_seq_9_2", "text": "7, 2, 9, 5, 1, 6, 3, 8, 4.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_9_3": {
+    "clips": [
+      { "id": "task_shared_seq_9_3", "text": "5, 4, 7, 2, 8, 1, 6, 3, 9.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_10_1": {
+    "clips": [
+      { "id": "task_shared_seq_10_1", "text": "2, 6, 9, 3, 7, 4, 1, 8, 5, 2.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_10_2": {
+    "clips": [
+      { "id": "task_shared_seq_10_2", "text": "8, 1, 5, 3, 9, 6, 2, 7, 4, 1.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "task_shared_seq_10_3": {
+    "clips": [
+      { "id": "task_shared_seq_10_3", "text": "4, 9, 2, 7, 5, 3, 8, 1, 6, 4.", "voice": "default", "sfx": null }
+    ]
+  },
+
+  "end_no_humor_1": {
+    "clips": [
+      { "id": "end_no_humor_1", "text": "That is the end of the task. We have now finished all of the sequences. It has been some time since the last time I was asked to go through something like this. I had a wonderful time working with you today. Thank you!", "voice": "default", "sfx": null }
+    ]
+  }
+}
