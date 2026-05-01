@@ -25,7 +25,7 @@ VOICE_ID      = "JGzTGubAVbbgG0SsLIlg"   # Riley
 MODEL_ID      = "eleven_v3"
 OUTPUT_FORMAT = "mp3_22050_32"
 OUTPUT_DIR    = os.path.join(PROJECT_ROOT, "nao_voice_files")
-TEXTS_FILE    = os.path.join(PROJECT_ROOT, "texts", "other.json")
+TEXTS_FILE    = os.path.join(PROJECT_ROOT, "texts", "others.json")
 API_KEY       = os.getenv("ELEVENLABS_API_KEY")
 
 HEADERS = {

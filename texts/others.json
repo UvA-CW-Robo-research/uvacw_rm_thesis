@@ -1,7 +1,7 @@
 {
   "intro_shared_1": {
     "clips": [
-      { "id": "intro_shared_1", "text": "Hello! My name is NAO. I'm here for the short task. You will read number sequences, and I will try to repeat them back.", "voice": "default", "sfx": null }
+      { "id": "intro_shared_1", "text": "Hello! My name is Now. I'm here for the short task. You will read number sequences, and I will try to repeat them back.", "voice": "default", "sfx": null }
     ]
   },
 
