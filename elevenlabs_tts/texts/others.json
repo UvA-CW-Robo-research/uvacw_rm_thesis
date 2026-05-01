@@ -103,7 +103,7 @@
 
   "end_no_humor_1": {
     "clips": [
-      { "id": "end_no_humor_1", "text": "That is the end of the task. We have now finished all of the sequences. It has been some time since the last time I was asked to go through something like this. I had a wonderful time working with you today. Thank you!", "voice": "default", "sfx": null }
+      { "id": "end_no_humor_1", "text": "That is the end of the task. We have now finished all of the sequences. It takes a little bit of time to go through all of the sequences one by one. I had a wonderful time working with you today. Thank you!", "voice": "default", "sfx": null }
     ]
   }
 }
