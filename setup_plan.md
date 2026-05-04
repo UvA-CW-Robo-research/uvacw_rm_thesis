@@ -9,6 +9,6 @@
 - [x] Finalize script with supervisor
 - [x] Structure and insert NAO's speech texts into a TTS-friendly file
 - [x] Generate audio files for the final script using TTS software (ElevenLabs) - run it in the default environment because Python 2.7 is not compatible
-- [ ] Transfer audio files to the robot via SCP
-- [ ] Restructure the architecture after implementing the audio files
+- [x] Transfer audio files to the robot via SCP
+- [x] Restructure the architecture after implementing the audio files
 - [ ] Final pilot test before data collection
