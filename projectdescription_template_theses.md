@@ -1,7 +1,7 @@
 ---
 
 title: "I, Robot: Funny or Faulty?"
-subtitle: "Humor and communication failure in social robotics: Effects on perceived warmth and competence"
+subtitle: "Robots Are Social Actors? The Interplaying Effects of Performance Error and Humor on Individuals’ Social Perception of a Humanoid Robot"
 date: Semester 2, academic year 2025/2026
 ---
 ###### 2026
